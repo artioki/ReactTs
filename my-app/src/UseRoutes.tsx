@@ -8,10 +8,9 @@ export const useRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="" element={<PageNewest />} />
-        <Route path=":id" element={<PageItem />} />
-        <Route path="timer" element={<div>timer</div>} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="newest/:page" element={<PageNewest />} />
+        <Route path="post/:id" element={<PageItem />} />
+        <Route path="*" element={<Navigate to="/newest/1" />} />
       </Route>
     </Routes>
   );

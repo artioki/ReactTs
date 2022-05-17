@@ -2,6 +2,8 @@ import React, { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemMore from '../components/ItemMore';
 import { IFeedItem } from '../types/IFeedItem';
+import ButtonHistoryBack from '../components/ButtonHistoryBack';
+import ButtonReload from '../components/ButtonReload';
 
 const PageItem:FC = () => {
   const [item, setitem] = useState<IFeedItem>();
@@ -18,7 +20,7 @@ const PageItem:FC = () => {
     .then(response => response.json().then(json => json as IFeedItem))
     .then(json => {
       // eslint-disable-next-line no-console
-      console.log(json);
+      //console.log(json,'sss');
       setitem(json);
     });
     }catch(e){
@@ -27,7 +29,10 @@ const PageItem:FC = () => {
   }
   return (
     <div>
-      {item ? <ItemMore key={item.id} Item={item}></ItemMore> : 'sss'}
+      <div><ButtonHistoryBack/><ButtonReload funcSet={fetchNews}/></div>
+      {item
+      ? <ItemMore key={item.id} Item={item}></ItemMore>
+      : <div className="spinner-border" role="status"> <span className="sr-only"></span> </div>}
     </div>
   );
 };
