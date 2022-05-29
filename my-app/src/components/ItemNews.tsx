@@ -10,6 +10,7 @@ const Div = styled.div`
     color:grey;
   }
 `;
+
 interface ItemNewsProps {
   Item: IFeedItem;
 }

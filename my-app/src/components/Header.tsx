@@ -8,11 +8,9 @@ const Header:FC = () => {
     <header>
       <Navbar bg="dark" variant="dark">
       <Container>
-      <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+      <Navbar.Brand as={NavLink} to="/newest/">Home</Navbar.Brand>
       <Nav className="me-auto">
         <Nav.Link as={NavLink} to="/newest/">Newest</Nav.Link>
-        <Nav.Link as={NavLink} to="/post/">map</Nav.Link>
-        <Nav.Link as={NavLink} to="#pricing">Pricing</Nav.Link>
       </Nav>
       </Container>
       </Navbar>

@@ -4,34 +4,38 @@ import ItemMore from '../components/ItemMore';
 import { IFeedItem } from '../types/IFeedItem';
 import ButtonHistoryBack from '../components/ButtonHistoryBack';
 import ButtonReload from '../components/ButtonReload';
+import { shallowEqual, useSelector } from 'react-redux';
+import { UseTypedSelector } from '../hooks/useTypedSelector';
+import { useTypedDispatch } from '../hooks/useTypedDispatch';
+import { fetchOneFeed } from '../store/actionCreater/fetchFeed';
+import styled from 'styled-components';
 
+const DivActive = styled.div`
+ margin:10px;
+`;
 const PageItem:FC = () => {
-  const [item, setitem] = useState<IFeedItem>();
+
+  const {iFeedItem,error,loading} = UseTypedSelector(state => state.feed,shallowEqual);
+  const dispatch = useTypedDispatch();
   const {id} = useParams();
+
+  const fetch = (id:string|undefined,iFeedItem:IFeedItem[]) => {
+    return () => dispatch(fetchOneFeed(id,iFeedItem));
+  };
   useEffect(() => {
-    fetchNews();
-    // eslint-disable-next-line no-console
-    console.log(item);
+    dispatch(fetchOneFeed(id,iFeedItem));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
-  async function fetchNews() {
-  try{
-    const response = await fetch(`https://api.hnpwa.com/v0/item/${id}.json`)
-    .then(response => response.json().then(json => json as IFeedItem))
-    .then(json => {
-      // eslint-disable-next-line no-console
-      //console.log(json,'sss');
-      setitem(json);
-    });
-    }catch(e){
-      alert(e);
-    }
+  }, [id,dispatch]);
+  if(error){
+    return (
+      <div>ERROR</div>
+    );
   }
   return (
     <div>
-      <div><ButtonHistoryBack/><ButtonReload funcSet={fetchNews}/></div>
-      {item
-      ? <ItemMore key={item.id} Item={item}></ItemMore>
+      <DivActive><ButtonHistoryBack/><ButtonReload funcSet={fetch(id,iFeedItem)}/></DivActive>
+      {iFeedItem[0]
+      ? <ItemMore key={iFeedItem[0].id} Item={iFeedItem[0]}></ItemMore>
       : <div className="spinner-border" role="status"> <span className="sr-only"></span> </div>}
     </div>
   );

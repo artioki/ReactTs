@@ -1,15 +1,37 @@
 /* eslint-disable no-console */
-import React, { FC } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
+import styled from 'styled-components';
+import { Context } from '../context';
+
+const Button = styled.button`
+  & {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border-radius: 3px;
+    border:1px gray solid;
+  }
+  &:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+`;
 interface ItemCommentProps{
     funcSet:()=>void;
   }
 
 const ButtonReload:FC<ItemCommentProps> = ({funcSet}) => {
-  const time = () => {setInterval(function(){ time();funcSet();}, 60000);};
-  time();
+  const second = useContext(Context);
+  useEffect(() => {
+    if(second % 60 === 0){
+      funcSet();
+    }
+    console.log(`${second}`);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [second]);
+
   return (
     <>
-      <button onClick={() => funcSet()}><i className="bi bi-arrow-counterclockwise"></i></button>
+      <Button onClick={() => funcSet()}><i className="bi bi-arrow-counterclockwise"></i></Button>
     </>
   );
 };

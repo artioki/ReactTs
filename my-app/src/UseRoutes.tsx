@@ -10,7 +10,7 @@ export const useRoutes = () => {
       <Route path="/" element={<Layout />}>
         <Route path="newest/:page" element={<PageNewest />} />
         <Route path="post/:id" element={<PageItem />} />
-        <Route path="*" element={<Navigate to="/newest/1" />} />
+        <Route path="*" element={<Navigate to="newest/1" />} />
       </Route>
     </Routes>
   );

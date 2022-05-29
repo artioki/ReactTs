@@ -1,9 +1,7 @@
 import React, { FC, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { Interface } from 'readline';
 import styled from 'styled-components';
 import { IFeedItem } from '../types/IFeedItem';
-import ButtonHistoryBack from './ButtonHistoryBack';
+
 
 
 const Div = styled.div`
