@@ -1,11 +1,10 @@
 /* eslint-disable no-console */
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import ItemNews from '../components/ItemNews';
 import { IFeedItem } from '../types/IFeedItem';
 import styled from 'styled-components';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ButtonReload from '../components/ButtonReload';
-import { shallowEqual, useDispatch } from 'react-redux';
 import { fetchFeed } from '../store/actionCreater/fetchFeed';
 import { UseTypedSelector } from '../hooks/useTypedSelector';
 import { useTypedDispatch } from '../hooks/useTypedDispatch';

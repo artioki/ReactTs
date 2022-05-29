@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemMore from '../components/ItemMore';
 import { IFeedItem } from '../types/IFeedItem';
 import ButtonHistoryBack from '../components/ButtonHistoryBack';
 import ButtonReload from '../components/ButtonReload';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual } from 'react-redux';
 import { UseTypedSelector } from '../hooks/useTypedSelector';
 import { useTypedDispatch } from '../hooks/useTypedDispatch';
 import { fetchOneFeed } from '../store/actionCreater/fetchFeed';
@@ -15,7 +15,7 @@ const DivActive = styled.div`
 `;
 const PageItem:FC = () => {
 
-  const {iFeedItem,error,loading} = UseTypedSelector(state => state.feed,shallowEqual);
+  const {iFeedItem,error} = UseTypedSelector(state => state.feed,shallowEqual);
   const dispatch = useTypedDispatch();
   const {id} = useParams();
 
