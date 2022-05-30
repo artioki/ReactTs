@@ -1,0 +1,4 @@
+make: Entering directory 'c:/Users/Z156/Desktop/test_zad/��������TypeScript/my-app'
+docker build -t name:latest .
+make: Leaving directory 'c:/Users/Z156/Desktop/test_zad/��������TypeScript/my-app'
+ 
