@@ -1,4 +1,3 @@
-import { IFeedItem } from '../../types/IFeedItem';
 import { FeedAction, FeedActionTypes, FeedState } from '../../types/TypeReducer';
 
 

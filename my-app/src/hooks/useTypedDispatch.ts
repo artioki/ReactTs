@@ -1,4 +1,4 @@
-import { FeedAction } from './../types/TypeReducer';
+import { FeedAction } from '../types/TypeReducer';
 import { useDispatch } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';

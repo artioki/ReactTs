@@ -1,7 +1,6 @@
-/* eslint-disable no-console */
 import React, { FC, useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { Context } from '../context';
+import { Context } from '../Context';
 
 const Button = styled.button`
   & {
@@ -25,9 +24,7 @@ const ButtonReload:FC<ItemCommentProps> = ({funcSet}) => {
     if(second % 60 === 0){
       funcSet();
     }
-    console.log(`${second}`);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [second]);
+  }, [funcSet, second]);
 
   return (
     <>

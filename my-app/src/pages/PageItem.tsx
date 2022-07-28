@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, {FC, useCallback, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import ItemMore from '../components/ItemMore';
 import { IFeedItem } from '../types/IFeedItem';
@@ -19,13 +19,14 @@ const PageItem:FC = () => {
   const dispatch = useTypedDispatch();
   const {id} = useParams();
 
-  const fetch = (id:string|undefined,iFeedItem:IFeedItem[]) => {
-    return () => dispatch(fetchOneFeed(id,iFeedItem));
-  };
+  const fetch = useCallback(
+      (id:string|undefined,iFeedItem:IFeedItem[]) => {
+        return () => dispatch(fetchOneFeed(id,iFeedItem));
+      },[dispatch],
+  );
   useEffect(() => {
     dispatch(fetchOneFeed(id,iFeedItem));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id,dispatch]);
+  }, [id, dispatch, iFeedItem]);
   if(error){
     return (
       <div>ERROR</div>

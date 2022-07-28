@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import React, { FC, useEffect } from 'react';
+import React, {FC, useCallback, useEffect} from 'react';
 import ItemNews from '../components/ItemNews';
 import { IFeedItem } from '../types/IFeedItem';
 import styled from 'styled-components';
@@ -28,7 +27,7 @@ const Div = styled.div`
   font-size:20px;
   font-style: normal;
   & a{
-    margin:0px 1em;
+    margin:0 1em;
   }
 `;
 const DivActive = styled.div`
@@ -38,13 +37,15 @@ const PageHome: FC = () => {
   const {iFeedItem,error} = UseTypedSelector(state => state.feed);
   const {page} = useParams();
   const dispatch = useTypedDispatch();
-  const fetch = (page:string|undefined,iFeedItem:IFeedItem[]) => {
-    return () => dispatch(fetchFeed(page,iFeedItem));
-  };
+  const fetch = useCallback(
+      (page:string|undefined,iFeedItem:IFeedItem[]) => {
+          return () => dispatch(fetchFeed(page,iFeedItem));
+      },
+      [dispatch],
+  );
   useEffect(() => {
     dispatch(fetchFeed(page,iFeedItem));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, dispatch]);
+  }, [page, dispatch, iFeedItem]);
   if(error){
     return (
       <div>ERROR</div>

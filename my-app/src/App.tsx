@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import { useRoutes } from './UseRoutes';
-import { Context } from './context';
+import { Context } from './Context';
 
 
 const App: FC = () => {

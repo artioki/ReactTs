@@ -5,7 +5,7 @@ import { IFeedItem } from '../types/IFeedItem';
 
 
 const Div = styled.div`
-  padding: 0px 10px;
+  padding: 0 10px;
   margin-bottom:20px;
   margin-top:0.1em;
   & a:hover{
@@ -57,30 +57,29 @@ interface ItemCommentProps{
   hides?:boolean|undefined;
 }
 const ItemComment:FC<ItemCommentProps> = ({Item,first = true,hides = undefined}) => {
-  const [hide, sethide] = useState<boolean>(true);
-  let hideis = hides;
+  const [hide, setHide] = useState<boolean>(true);
   const clickHandler = (e:React.MouseEvent<HTMLParagraphElement>) =>{
-    sethide(!hide);
+    setHide(!hide);
   };
   return (
     <>
-    <Div className={first?'':'second'} style={{display:hideis?'none':'block'}} >
+    <Div className={first?'':'second'} style={{display:hides?'none':'block'}} >
       <div className='foot'>
         {Item.user} {' | '} {Item.time_ago}{' | '} {Item.type}
       </div>
       <div dangerouslySetInnerHTML={{__html: Item.content}}></div>
       {Item.comments_count
-      ?<div className='hv' onClick={clickHandler} style={{display:hideis?'none':'block'}}>
+        ?<div className='hv' onClick={clickHandler} style={{display:hides?'none':'block'}}>
         {hide
-        ?<WrapComment strStrong={`[${Item.comments_count}]`} str=' открыть ветку'></WrapComment>
-        :<WrapComment strStrong={'[-]'} str=' скрыть ветку'></WrapComment>
+          ?<WrapComment strStrong={`[${Item.comments_count}]`} str=' открыть ветку'></WrapComment>
+          :<WrapComment strStrong={'[-]'} str=' скрыть ветку'></WrapComment>
         }
       </div>
-      :''
+        :''
       }
       {Item.comments
-      ? Item.comments.map((item:IFeedItem) =>  (<ItemComment key={item.id} Item={item} first={false} hides={hide}/>))
-      : <div className="spinner-border" role="status"> <span className="sr-only"></span> </div>}
+          ? Item.comments.map((item:IFeedItem) =>  (<ItemComment key={item.id} Item={item} first={false} hides={hide}/>))
+          : <div className="spinner-border" role="status"> <span className="sr-only"></span> </div>}
     </Div>
     </>
 

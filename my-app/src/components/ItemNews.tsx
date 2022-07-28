@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { IFeedItem } from '../types/IFeedItem';
+
 const Div = styled.div`
   padding: 10px;
   margin-bottom:0.10em;
