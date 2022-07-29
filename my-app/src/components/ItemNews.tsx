@@ -1,14 +1,33 @@
 import React, { FC } from 'react';
-import { IFeedItem } from '../types/IFeedItem';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { FeedItemInterface } from '../types/FeedItemInterface';
+
+const Div = styled.div`
+  padding: 10px;
+  margin-bottom:0.10em;
+  & .foot{
+    font-size:12px;
+    color:grey;
+  }
+`;
 
 interface ItemNewsProps {
-  Item: IFeedItem;
+  Item: FeedItemInterface;
 }
 const ItemNews: FC<ItemNewsProps> = ({ Item }) => {
   return (
-    <div style={{ padding: 10, border: '1px solid blue' }}>
-      {Item.title} <hr /> рейтинг:{Item.points} ,автор: {Item.user}, время:{Item.time_ago} , {Item.type}
-    </div>
+    <Div >
+      <div>
+        <a href={Item.url}>{Item.title}</a> {' | '}
+        <Link to={`/post/${Item.id}`}>  {Item.comments_count? 'comments:'+ Item.comments_count : 'discuss'}</Link>
+      </div>
+      <div className='foot'>
+        rate: {Item.points}{' | '}{Item.user}{' | '}{Item.time_ago} , {Item.type}
+      </div>
+    </Div>
+    ??
+    <div className="spinner-border" role="status"> <span className="sr-only"></span> </div>
   );
 };
 

@@ -13,3 +13,12 @@ html,
 .content {
   flex: 1;
 }
+.content a{
+  outline: none;
+  text-decoration: none;
+  color:green;
+}
+.content a:hover{
+  color:rgb(1, 111, 1);
+  text-decoration:underline;
+}
