@@ -1,4 +1,4 @@
-export interface IFeedItem {
+export interface FeedItemInterface {
   id: number;
   title: string;
   points: number | null;
@@ -11,7 +11,7 @@ export interface IFeedItem {
   type: string;
   url?: string;
   domain?: string;
-  comments: IFeedItem[]; // Comments are items too
+  comments: FeedItemInterface[];
   level: number;
   comments_count: number;
 }

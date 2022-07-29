@@ -1,8 +1,8 @@
-import { IFeedItem } from './IFeedItem';
+import { FeedItemInterface } from './FeedItemInterface';
 
 
 export interface FeedState{
-  iFeedItem:IFeedItem[];
+  FeedItem:FeedItemInterface[];
   loading:boolean;
   error:null| string;
 }
@@ -16,7 +16,7 @@ interface FetchFeedAction{
 }
 interface FetchFeedSuccessAction{
   type:FeedActionTypes.FETCH_FEED_SUCCESS;
-  payload:IFeedItem[];
+  payload:FeedItemInterface[];
 }
 interface FetchFeedErrorAction{
   type:FeedActionTypes.FETCH_FEED_ERROR;

@@ -3,14 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Button = styled.button`
-  & {
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    border-radius: 3px;
-    border:1px gray solid;
-  }
+  transition-duration: 0.4s;
+  border-radius: 3px;
+  border:1px gray solid;
   &:hover {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
     color: white;
   }
 `;

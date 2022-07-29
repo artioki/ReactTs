@@ -2,15 +2,14 @@ import React, { FC, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { Context } from '../Context';
 
+
+
 const Button = styled.button`
-  & {
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    border-radius: 3px;
-    border:1px gray solid;
-  }
+  transition-duration: 0.4s;
+  border-radius: 3px;
+  border:1px gray solid;
   &:hover {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
     color: white;
   }
 `;
@@ -28,7 +27,7 @@ const ButtonReload:FC<ItemCommentProps> = ({funcSet}) => {
 
   return (
     <>
-      <Button onClick={() => funcSet()}><i className="bi bi-arrow-counterclockwise"></i></Button>
+      <Button onClick={funcSet}><i className="bi bi-arrow-counterclockwise"></i></Button>
     </>
   );
 };

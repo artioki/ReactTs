@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-import { IFeedItem } from '../types/IFeedItem';
+import { FeedItemInterface } from '../types/FeedItemInterface';
 
 
 
@@ -18,12 +18,13 @@ const Div = styled.div`
   & p{
       margin-bottom:0.25em;
   }
-  &.second{
+  &.notFirstCommentLevel{
     border-left: 2px solid green;
     margin-left:7px;
     padding-left:20px;
   }
   & .hv{
+    cursor:pointer;
     display: flex;
     color:grey;
     padding-bottom:5px;
@@ -35,50 +36,48 @@ const Div = styled.div`
       color:green;
     }
   }
-  
-
 `;
 
 interface WrapCommentProps{
-  strStrong:string;
-  str:string;
+  wrapper:string;
+  commentWrapper:string;
 }
-const WrapComment:FC<WrapCommentProps> = ({strStrong,str}) =>{
+const WrapComment:FC<WrapCommentProps> = ({wrapper,commentWrapper}) =>{
   return(
     <>
-    <strong>{strStrong}</strong>
-    {str}
+    <strong>{wrapper}</strong>
+    {commentWrapper}
     </>
   );
 };
 interface ItemCommentProps{
-  Item: IFeedItem;
-  first?:boolean;
-  hides?:boolean|undefined;
+  Item: FeedItemInterface;
+  firstCommentLevel?:boolean;
+  hides?:boolean;
 }
-const ItemComment:FC<ItemCommentProps> = ({Item,first = true,hides = undefined}) => {
-  const [hide, setHide] = useState<boolean>(true);
-  const clickHandler = (e:React.MouseEvent<HTMLParagraphElement>) =>{
-    setHide(!hide);
+const ItemComment:FC<ItemCommentProps> = ({Item,firstCommentLevel = true,hides }) => {
+  const [hideChild, setHideChild] = useState<boolean>(true);
+  const clickHandler = () =>{
+    setHideChild(state => !state);
   };
   return (
     <>
-    <Div className={first?'':'second'} style={{display:hides?'none':'block'}} >
+    <Div className={firstCommentLevel?'':'notFirstCommentLevel'} style={{display:hides?'none':'block'}} >
       <div className='foot'>
-        {Item.user} {' | '} {Item.time_ago}{' | '} {Item.type}
+        {Item.user} {' | '} {Item.time_ago} {' | '} {Item.type}
       </div>
       <div dangerouslySetInnerHTML={{__html: Item.content}}></div>
       {Item.comments_count
-        ?<div className='hv' onClick={clickHandler} style={{display:hides?'none':'block'}}>
-        {hide
-          ?<WrapComment strStrong={`[${Item.comments_count}]`} str=' открыть ветку'></WrapComment>
-          :<WrapComment strStrong={'[-]'} str=' скрыть ветку'></WrapComment>
-        }
-      </div>
-        :''
+        ? <div className='hv' onClick={clickHandler} style={{display:hides?'none':'inline-block'}}>
+          {hideChild
+            ?<WrapComment wrapper={`[${Item.comments_count}]`} commentWrapper=' открыть ветку'></WrapComment>
+            :<WrapComment wrapper={'[-]'} commentWrapper=' скрыть ветку'></WrapComment>
+          }
+        </div>
+        : null
       }
       {Item.comments
-          ? Item.comments.map((item:IFeedItem) =>  (<ItemComment key={item.id} Item={item} first={false} hides={hide}/>))
+          ? Item.comments.map((item:FeedItemInterface) =>  (<ItemComment key={item.id} Item={item} firstCommentLevel={false} hides={hideChild}/>))
           : <div className="spinner-border" role="status"> <span className="sr-only"></span> </div>}
     </Div>
     </>

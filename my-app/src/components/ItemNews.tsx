@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { IFeedItem } from '../types/IFeedItem';
+import { FeedItemInterface } from '../types/FeedItemInterface';
 
 const Div = styled.div`
   padding: 10px;
@@ -13,7 +13,7 @@ const Div = styled.div`
 `;
 
 interface ItemNewsProps {
-  Item: IFeedItem;
+  Item: FeedItemInterface;
 }
 const ItemNews: FC<ItemNewsProps> = ({ Item }) => {
   return (
