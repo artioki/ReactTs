@@ -13,7 +13,7 @@ const ItemMore: FC<ItemMoreProps> = ({Item})=> {
     <ItemNews key={Item.id} Item={Item}></ItemNews>
     {Item.comments
       ? Item.comments.map((item:FeedItemInterface) =>  (<ItemComment key={item.id} Item={item}/>))
-      : <div className="spinner-border" role="status"> <span className="sr-only"></span> </div>}
+      : <div className='spinner-border' role='status'> <span className='sr-only'></span> </div>}
     </>
   );
 };

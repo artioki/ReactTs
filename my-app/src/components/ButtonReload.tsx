@@ -15,7 +15,7 @@ const Button = styled.button`
 `;
 interface ItemCommentProps{
     funcSet:()=>void;
-  }
+}
 
 const ButtonReload:FC<ItemCommentProps> = ({funcSet}) => {
   const second = useContext(Context);
