@@ -1,16 +1,20 @@
 import React, { FC } from 'react';
-import { IFeedItem } from '../types/IFeedItem';
+import { FeedItemInterface } from '../types/FeedItemInterface';
+import ItemComment from './ItemComment';
+import ItemNews from './ItemNews';
 
 interface ItemMoreProps {
-  Item: IFeedItem;
-  P?:number;
+  Item: FeedItemInterface;
 }
-const ItemMore: FC<ItemMoreProps> = ({ Item ,P = 10}) => {
+
+const ItemMore: FC<ItemMoreProps> = ({Item})=> {
   return (
-    <div style={{ padding: 10,paddingLeft:P }}>
-      автор:{Item.user}, время:{Item.time_ago}, {Item.type} <hr /> <div dangerouslySetInnerHTML={{__html: Item.content}}></div>
-      {Item.comments ? Item.comments.map((item:IFeedItem) =>  (<ItemMore key={item.id} Item={item} P={P+10}/>)) : 'ss'}
-    </div>
+    <>
+    <ItemNews key={Item.id} Item={Item}></ItemNews>
+    {Item.comments
+      ? Item.comments.map((item:FeedItemInterface) =>  (<ItemComment key={item.id} Item={item}/>))
+      : <div className='spinner-border' role='status'> <span className='sr-only'></span> </div>}
+    </>
   );
 };
 
