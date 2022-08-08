@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "dev": "../../prisma-docker/node_modules/.bin/nodemon --config nodemon.json src/server.ts",
+    "dev": "nodemon --config nodemon.json src/server.ts",
     "db": "npm run migrate && npm run seed ",
     "migrate": "npx prisma migrate dev --name initial-migration",
     "seed": "npx prisma db seed --preview-feature",
