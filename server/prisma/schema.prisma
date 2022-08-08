@@ -1,0 +1,30 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+
+model ItemNews {
+    id      Int       @default(autoincrement()) @id
+    title   String?
+    points  Int?
+    user    String
+    time    Int
+    time_ago    String
+    content String
+    deleted Boolean?
+    dead    Boolean?
+    type    String
+    url     String?
+    domain  String?
+    level  Int?
+    comments_count Int @default(0)
+    comments    ItemNews[] @relation("comments")
+    parent_id   Int?
+    parent      ItemNews?   @relation("comments", fields: [parent_id], references: [id])
+}
