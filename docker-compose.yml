@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  db:
+    image: "postgres"
+    ports:
+      - "2345:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "mydb"
+  server:
+    build: ./server
+    ports:
+      - "5000:5000"
+      - "5555:5555"
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres@db:5432/mydb?schema=public"
+    depends_on:
+      - "db"
+  my-app:
+    build: ./my-app
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_SERVER_URL: "http://localhost:5000"
+    depends_on:
+      - "server"

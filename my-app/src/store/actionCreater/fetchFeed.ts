@@ -5,7 +5,7 @@ import { Dispatch } from 'redux';
 export const fetchFeed = (page:string|undefined) =>{
   return async (dispatch:Dispatch<FeedAction>) =>{
     try{
-      const response = await fetch(`https://api.hnpwa.com/v0/newest.json?page=${page}`)
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/newest/${page}.json`)
           .then((response) => response.json().then((json) => json as FeedItemInterface[]))
           .then((json) => {
             return json;
@@ -21,7 +21,7 @@ export const fetchFeed = (page:string|undefined) =>{
 export const fetchOneFeed = (id:string|undefined) =>{
   return async (dispatch:Dispatch<FeedAction>) =>{
       try{
-        const response = await fetch(`https://api.hnpwa.com/v0/item/${id}.json`)
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/item/${id}.json`)
         .then((response) => response.json().then((json) => json as FeedItemInterface))
         .then((json) => {
           return [json];
